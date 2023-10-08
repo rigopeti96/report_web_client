@@ -22,7 +22,7 @@ export class AuthService {
       .post<any>(`${this.endpoint}/signin`, user)
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
-        this.router.navigate(['user-profile/' + res.msg._id]);
+        this.router.navigate(['single-file-upload']);
       });
   }
   getToken() {
