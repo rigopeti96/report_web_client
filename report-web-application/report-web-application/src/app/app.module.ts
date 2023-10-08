@@ -7,11 +7,13 @@ import { SigninComponent } from './components/signin/signin.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/authconfig.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent
+    SigninComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
