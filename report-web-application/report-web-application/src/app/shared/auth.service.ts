@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   endpoint: string = 'http://localhost:8080/api/auth';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
+  headers = new HttpHeaders().set('Content-Type', 'application/json').set('Access-Control-Allow-Origin', 'http://localhost:8000');
   currentUser = {};
   constructor(private http: HttpClient, public router: Router) {}
   // Sign-in
@@ -21,8 +21,8 @@ export class AuthService {
     return this.http
       .post<any>(`${this.endpoint}/signin`, user)
       .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
-        this.router.navigate(['single-file-upload']);
+        localStorage.setItem('access_token', res.accessToken);
+        //this.router.navigate(['single-file-upload']);
       });
   }
   getToken() {

@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient,HttpHeaders, } from "@angular/common/http";
 import { throwError } from "rxjs";
+import { AuthService } from "../shared/auth.service";
 
 @Component({
   selector: "app-single-file-upload",
@@ -11,6 +12,10 @@ export class SingleFileUploadComponent {
   status: "initial" | "uploading" | "success" | "fail" = "initial"; // Variable to store file status
   file: File | null = null; // Variable to store file
 
+  endpoint: string = 'http://localhost:8080/api/gtfshandler';
+  headers = new HttpHeaders().set('Content-Type', 'application/json')
+  .set('Access-Control-Allow-Origin', 'http://localhost:8000');
+  
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
@@ -31,7 +36,7 @@ export class SingleFileUploadComponent {
   
       formData.append('file', this.file, this.file.name);
   
-      const upload$ = this.http.post("http://localhost:8080/api/gtfshandler/uploadArchive", formData);
+      const upload$ = this.http.post(`${this.endpoint}/uploadArchive`, formData);
   
       this.status = 'uploading';
   
